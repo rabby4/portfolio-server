@@ -4,7 +4,11 @@ import { SkillServices } from './skill.service';
 
 // create Skill information
 const createSkill = catchAsync(async (req, res) => {
-  const result = await SkillServices.createSkillIntoDB(req.body);
+  const data = {
+    ...JSON.parse(req.body.data),
+    image: req.file?.path,
+  };
+  const result = await SkillServices.createSkillIntoDB(data);
   sendResponse(res, {
     success: true,
     statusCode: 200,
