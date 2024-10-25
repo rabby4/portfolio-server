@@ -4,7 +4,11 @@ import { BlogServices } from './blog.service';
 
 // create Blog information
 const createBlog = catchAsync(async (req, res) => {
-  const result = await BlogServices.createBlogIntoDB(req.body);
+  const data = {
+    ...JSON.parse(req.body.data),
+    image: req.file?.path,
+  };
+  const result = await BlogServices.createBlogIntoDB(data);
   sendResponse(res, {
     success: true,
     statusCode: 200,

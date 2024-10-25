@@ -4,7 +4,11 @@ import { ProjectServices } from './project.service';
 
 // create Project information
 const createProject = catchAsync(async (req, res) => {
-  const result = await ProjectServices.createProjectIntoDB(req.body);
+  const data = {
+    ...JSON.parse(req.body.data),
+    image: req.file?.path,
+  };
+  const result = await ProjectServices.createProjectIntoDB(data);
   sendResponse(res, {
     success: true,
     statusCode: 200,

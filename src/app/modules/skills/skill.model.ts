@@ -11,6 +11,9 @@ const skillSchema = new Schema<TSkill>(
       type: String,
       required: true,
     },
+    color: {
+      type: String,
+    },
   },
   {
     timestamps: true,
