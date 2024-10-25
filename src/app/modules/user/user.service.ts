@@ -1,6 +1,6 @@
 import config from '../../config';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { TLoginUser } from './user.interface';
 import { User } from './user.model';
 import AppError from '../../errors/appError';
@@ -41,6 +41,18 @@ const loginUser = async (payload: TLoginUser) => {
   };
 };
 
+const getUserFromDB = async (token: string) => {
+  // check if the token is valid or not
+  const decoded = jwt.verify(
+    token,
+    config.jwt_access_token as string,
+  ) as JwtPayload;
+
+  const result = await User.findOne({ _id: decoded.id });
+  return result;
+};
+
 export const UserServices = {
   loginUser,
+  getUserFromDB,
 };
