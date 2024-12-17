@@ -1,5 +1,6 @@
 export type TSkill = {
   title: string;
   image: string;
-  color: string
+  category?: 'Frontend' | 'Backend' | 'Database' | 'Tools';
+  color?: string;
 };

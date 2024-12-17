@@ -49,7 +49,11 @@ const getSingleSkills = catchAsync(async (req, res) => {
 
 const updateSkill = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await SkillServices.updateSkillsIntoDB(id, req.body);
+  const data = {
+    ...JSON.parse(req.body.data),
+    image: req.file?.path,
+  };
+  const result = await SkillServices.updateSkillsIntoDB(id, data);
 
   if (!result) {
     sendResponse(res, {

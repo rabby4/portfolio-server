@@ -11,6 +11,12 @@ const skillSchema = new Schema<TSkill>(
       type: String,
       required: true,
     },
+    category: {
+      type: String,
+      enum: {
+        values: ['Frontend', 'Backend', 'Database', 'Tools'],
+      },
+    },
     color: {
       type: String,
     },
